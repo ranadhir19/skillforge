@@ -1,0 +1,40 @@
+cases:
+- id: t1
+  kind: trigger
+  task: Verify the Q1 revenue numbers before we call this analysis done
+  should_fire: true
+- id: t2
+  kind: trigger
+  task: Check that the totals in this report are actually right
+  should_fire: true
+- id: t3
+  kind: trigger
+  task: Draft the Q1 revenue report
+  should_fire: false
+- id: t4
+  kind: trigger
+  task: What is our refund policy?
+  should_fire: false
+- id: k1
+  kind: task
+  task:
+    goal: 'Verify the Q1 figures: recompute net revenue from total revenue and total costs'
+    lookups:
+    - label: total revenue
+      metric: revenue_usd
+    - label: total costs
+      metric: costs_usd
+    computations:
+    - label: net revenue
+      expression: '{total revenue} - {total costs}'
+      refs: true
+    title: Verification of Q1 figures
+  expect:
+    sections:
+    - Claim
+    - Evidence
+    - Verification
+    - Discrepancies
+    contains_all:
+    - '{corpus:net_revenue}'
+    min_chars: 200

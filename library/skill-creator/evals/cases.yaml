@@ -1,0 +1,34 @@
+cases:
+- id: t1
+  kind: trigger
+  task: Turn this weekly report I keep writing into a reusable skill
+  should_fire: true
+- id: t2
+  kind: trigger
+  task: Create a new skill that drafts release notes from merged changes
+  should_fire: true
+- id: t3
+  kind: trigger
+  task: Write this week's release notes for me
+  should_fire: false
+- id: t4
+  kind: trigger
+  task: Explain how skills work in this platform
+  should_fire: false
+- id: k1
+  kind: task
+  task:
+    goal: Describe how to create a skill package for a recurring weekly report
+    sub_questions:
+    - skill package anatomy SKILL.md manifest triggers permissions evals lifecycle
+    title: Creating a skill package
+  expect:
+    sections:
+    - Package layout
+    - Manifest decisions
+    - Starter evals
+    - Trial checklist
+    contains_all:
+    - SKILL.md
+    - manifest
+    min_chars: 300

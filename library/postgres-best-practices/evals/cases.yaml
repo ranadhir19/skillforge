@@ -1,0 +1,34 @@
+cases:
+- id: t1
+  kind: trigger
+  task: Review this orders schema for Postgres problems
+  should_fire: true
+- id: t2
+  kind: trigger
+  task: Check the database schema before we ship it
+  should_fire: true
+- id: t3
+  kind: trigger
+  task: Write the migration to add the orders table
+  should_fire: false
+- id: t4
+  kind: trigger
+  task: Analyse the orders data
+  should_fire: false
+- id: k1
+  kind: task
+  task:
+    goal: Review the orders service schema
+    sub_questions:
+    - orders schema customer_id foreign keys no index status TEXT check constraint sequential scans
+    title: 'Schema review: orders'
+  expect:
+    sections:
+    - Findings
+    - Impact
+    - Recommended changes
+    - Migration notes
+    contains_all:
+    - no index
+    - check constraint
+    min_chars: 300

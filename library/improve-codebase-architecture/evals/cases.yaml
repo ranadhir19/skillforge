@@ -1,0 +1,35 @@
+cases:
+- id: t1
+  kind: trigger
+  task: Review the monorepo architecture and find the worst hotspots
+  should_fire: true
+- id: t2
+  kind: trigger
+  task: Where should we refactor first? The codebase feels tangled
+  should_fire: true
+- id: t3
+  kind: trigger
+  task: Fix the circular import between billing and reporting now
+  should_fire: false
+- id: t4
+  kind: trigger
+  task: Review this small helper function
+  should_fire: false
+- id: k1
+  kind: task
+  task:
+    goal: 'Architecture review: hotspots and a refactoring plan'
+    sub_questions:
+    - architecture hotspots billing module imported 14 modules god module 4100 circular dependency cache
+      facade
+    title: 'Architecture review: monorepo'
+  expect:
+    sections:
+    - Hotspots
+    - Evidence
+    - Proposal
+    - Risks and sequencing
+    contains_all:
+    - billing
+    - circular
+    min_chars: 300

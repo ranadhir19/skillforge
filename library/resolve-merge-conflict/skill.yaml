@@ -1,0 +1,46 @@
+apiVersion: skillforge/v1
+name: resolve-merge-conflict
+version: 1.0.0
+lifecycle: active
+triggers:
+  examples:
+  - Resolve the conflict in the retry configuration, both sides have a point
+  - "Merge conflict in the config file \u2014 work out what each side wanted"
+  counter_examples:
+  - Change max_retries to 3 in the config
+  - Review the retry logic code
+requires:
+  tools: &id001
+  - native:doc_search
+  - native:file_writer
+  capabilities:
+  - tool_calling
+  min_context_tokens: 8000
+permissions:
+  tools: *id001
+  scripts: []
+  network: none
+  filesystem:
+    read: []
+    write:
+    - ''
+  approval_required_for: []
+composition:
+  composes: []
+  conflicts: []
+governs:
+- research
+- write
+output:
+  sections:
+  - Side A intent
+  - Side B intent
+  - Resolution
+  - What needs a human decision
+budget:
+  max_tokens_per_run: 30000
+  max_script_seconds: null
+evals:
+  suite: evals/cases.yaml
+  holdout: null
+  min_pass: 0.9

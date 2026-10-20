@@ -1,0 +1,52 @@
+apiVersion: skillforge/v1
+name: data-analysis
+version: 1.0.0
+lifecycle: active
+triggers:
+  examples:
+  - "Analyse Q1 revenue \u2014 totals, North region, costs and net"
+  - What were total units sold and net revenue in Q1?
+  counter_examples:
+  - Draft a memo about the sales team
+  - Extract the fields from this onboarding form
+requires:
+  tools: &id001
+  - native:doc_search
+  - native:data_lookup
+  - native:calculator
+  - native:file_writer
+  capabilities:
+  - tool_calling
+  min_context_tokens: 8000
+permissions:
+  tools: *id001
+  scripts: []
+  network: none
+  filesystem:
+    read: []
+    write:
+    - ''
+  approval_required_for:
+  - publish
+composition:
+  composes: []
+  conflicts: []
+governs:
+- research
+- lookup
+- compute
+- synthesize
+- write
+output:
+  sections:
+  - Question
+  - Figures
+  - Verification
+  - Notes
+budget:
+  max_tokens_per_run: 40000
+  max_script_seconds: null
+evals:
+  suite: evals/cases.yaml
+  holdout: null
+  min_pass: 0.9

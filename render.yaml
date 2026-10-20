@@ -1,0 +1,29 @@
+# SkillForge on Render: API (FastAPI web service) + UI (React static site).
+# Deploy order matters: create the API first, then set VITE_API_URL on the
+# static site to the API's real origin and redeploy the static site.
+services:
+  - type: web
+    name: skillforge-api
+    runtime: python
+    plan: starter
+    buildCommand: pip install -e . && pip install "fastapi>=0.110" uvicorn "strawberry-graphql[fastapi]>=0.220"
+    startCommand: uvicorn server.app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHONPATH
+        value: src:.
+      - key: SKILLFORGE_DATA_DIR
+        value: /tmp/skillforge-data
+      - key: PYTHON_VERSION
+        value: 3.12.3
+  - type: static
+    name: skillforge-web
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://skillforge-api.onrender.com
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

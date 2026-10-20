@@ -1,0 +1,46 @@
+apiVersion: skillforge/v1
+name: grill-me
+version: 1.0.0
+lifecycle: active
+triggers:
+  examples:
+  - "I want a dashboard, sort of, for the team \u2014 grill me on what it must do"
+  - This feature request is vague, question me until it's precise
+  counter_examples:
+  - Write the incident summary for INC-2041
+  - What were Q1 sales by region?
+requires:
+  tools: &id001
+  - native:doc_search
+  - native:file_writer
+  capabilities:
+  - tool_calling
+  min_context_tokens: 8000
+permissions:
+  tools: *id001
+  scripts: []
+  network: none
+  filesystem:
+    read: []
+    write:
+    - ''
+  approval_required_for: []
+composition:
+  composes: []
+  conflicts: []
+governs:
+- write
+output:
+  sections:
+  - What I heard
+  - Questions on scope
+  - Questions on inputs and outputs
+  - Questions on constraints
+  - Definition of done
+budget:
+  max_tokens_per_run: 30000
+  max_script_seconds: null
+evals:
+  suite: evals/cases.yaml
+  holdout: null
+  min_pass: 0.9

@@ -1,0 +1,47 @@
+apiVersion: skillforge/v1
+name: internal-comms
+version: 1.0.0
+lifecycle: active
+triggers:
+  examples:
+  - Write the stakeholder update about the payments outage
+  - Draft an incident update for the whole company
+  counter_examples:
+  - Write a handoff for the on-call engineer
+  - Diagnose the outage root cause
+requires:
+  tools: &id001
+  - native:doc_search
+  - native:file_writer
+  capabilities:
+  - tool_calling
+  min_context_tokens: 8000
+permissions:
+  tools: *id001
+  scripts: []
+  network: none
+  filesystem:
+    read: []
+    write:
+    - ''
+  approval_required_for: []
+composition:
+  composes: []
+  conflicts:
+  - handoff
+governs:
+- research
+- write
+output:
+  sections:
+  - Summary
+  - Impact
+  - Current status
+  - Next update
+budget:
+  max_tokens_per_run: 30000
+  max_script_seconds: null
+evals:
+  suite: evals/cases.yaml
+  holdout: null
+  min_pass: 0.9

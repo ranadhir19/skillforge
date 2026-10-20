@@ -1,0 +1,46 @@
+apiVersion: skillforge/v1
+name: postgres-best-practices
+version: 1.0.0
+lifecycle: active
+triggers:
+  examples:
+  - Review this orders schema for Postgres problems
+  - Check the database schema before we ship it
+  counter_examples:
+  - Write the migration to add the orders table
+  - Analyse the orders data
+requires:
+  tools: &id001
+  - native:doc_search
+  - native:file_writer
+  capabilities:
+  - tool_calling
+  min_context_tokens: 8000
+permissions:
+  tools: *id001
+  scripts: []
+  network: none
+  filesystem:
+    read: []
+    write:
+    - ''
+  approval_required_for: []
+composition:
+  composes: []
+  conflicts: []
+governs:
+- research
+- write
+output:
+  sections:
+  - Findings
+  - Impact
+  - Recommended changes
+  - Migration notes
+budget:
+  max_tokens_per_run: 30000
+  max_script_seconds: null
+evals:
+  suite: evals/cases.yaml
+  holdout: null
+  min_pass: 0.9

@@ -1,0 +1,34 @@
+cases:
+- id: t1
+  kind: trigger
+  task: Write a handoff for the payments outage investigation before I log off
+  should_fire: true
+- id: t2
+  kind: trigger
+  task: Hand this work over to the on-call engineer
+  should_fire: true
+- id: t3
+  kind: trigger
+  task: Summarise the payments outage postmortem
+  should_fire: false
+- id: t4
+  kind: trigger
+  task: Draft the incident update for stakeholders
+  should_fire: false
+- id: k1
+  kind: task
+  task:
+    goal: Hand off the payments outage investigation
+    sub_questions:
+    - payments outage postmortem root cause session-cache TTL config push action items
+    title: 'Handoff: payments outage investigation'
+  expect:
+    sections:
+    - Context
+    - Current state
+    - What was tried
+    - Next steps
+    - Risks and open questions
+    contains_all:
+    - '86400'
+    min_chars: 300

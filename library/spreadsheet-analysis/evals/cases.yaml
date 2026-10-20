@@ -1,0 +1,42 @@
+cases:
+- id: t1
+  kind: trigger
+  task: Analyse this Q1 metrics spreadsheet and total the revenue column
+  should_fire: true
+- id: t2
+  kind: trigger
+  task: Reconcile the spreadsheet totals against the metrics table
+  should_fire: true
+- id: t3
+  kind: trigger
+  task: Write up the Q1 findings as a report
+  should_fire: false
+- id: t4
+  kind: trigger
+  task: Extract the fields from this form
+  should_fire: false
+- id: k1
+  kind: task
+  task:
+    goal: Total the revenue column of the Q1 spreadsheet and cross-check it against the metrics table
+    lookups:
+    - label: total revenue
+      metric: revenue_usd
+    script_steps:
+    - skill: spreadsheet-analysis
+      script: scripts/csv_stats.py
+      payload:
+        asset: q1_metrics.csv
+        column: revenue_usd
+        op: sum
+      label: csv aggregate
+    title: 'Spreadsheet analysis: Q1 revenue'
+  expect:
+    sections:
+    - Profile
+    - Aggregates
+    - Cross-check
+    - Anomalies
+    contains_all:
+    - sum(revenue_usd) = {corpus:revenue_all}
+    min_chars: 200

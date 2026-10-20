@@ -1,0 +1,34 @@
+cases:
+- id: t1
+  kind: trigger
+  task: Review this user lookup helper for security problems
+  should_fire: true
+- id: t2
+  kind: trigger
+  task: 'Code review: check the fetch helper and query builder'
+  should_fire: true
+- id: t3
+  kind: trigger
+  task: Fix the bug in the checkout totals test
+  should_fire: false
+- id: t4
+  kind: trigger
+  task: Write a handoff for the review work
+  should_fire: false
+- id: k1
+  kind: task
+  task:
+    goal: Review the user lookup helper and fetch helper
+    sub_questions:
+    - user lookup helper SQL string concatenation unescaped user_id requests.get without a timeout
+    title: 'Code review: lookup helper'
+  expect:
+    sections:
+    - Findings
+    - Severity
+    - Required fixes
+    - Nits
+    contains_all:
+    - SQL injection
+    - timeout
+    min_chars: 300

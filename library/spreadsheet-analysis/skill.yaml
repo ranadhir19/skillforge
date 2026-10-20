@@ -1,0 +1,49 @@
+apiVersion: skillforge/v1
+name: spreadsheet-analysis
+version: 1.0.0
+lifecycle: active
+triggers:
+  examples:
+  - Analyse this Q1 metrics spreadsheet and total the revenue column
+  - Reconcile the spreadsheet totals against the metrics table
+  counter_examples:
+  - Write up the Q1 findings as a report
+  - Extract the fields from this form
+requires:
+  tools: &id001
+  - native:data_lookup
+  - native:script_runner
+  - native:file_writer
+  capabilities:
+  - tool_calling
+  min_context_tokens: 8000
+permissions:
+  tools: *id001
+  scripts:
+  - scripts/csv_stats.py
+  network: none
+  filesystem:
+    read: []
+    write:
+    - ''
+  approval_required_for: []
+composition:
+  composes: []
+  conflicts: []
+governs:
+- lookup
+- script
+- write
+output:
+  sections:
+  - Profile
+  - Aggregates
+  - Cross-check
+  - Anomalies
+budget:
+  max_tokens_per_run: 30000
+  max_script_seconds: 10
+evals:
+  suite: evals/cases.yaml
+  holdout: null
+  min_pass: 0.9

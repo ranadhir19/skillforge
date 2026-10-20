@@ -1,0 +1,46 @@
+apiVersion: skillforge/v1
+name: improve-codebase-architecture
+version: 1.0.0
+lifecycle: active
+triggers:
+  examples:
+  - Review the monorepo architecture and find the worst hotspots
+  - Where should we refactor first? The codebase feels tangled
+  counter_examples:
+  - Fix the circular import between billing and reporting now
+  - Review this small helper function
+requires:
+  tools: &id001
+  - native:doc_search
+  - native:file_writer
+  capabilities:
+  - tool_calling
+  min_context_tokens: 8000
+permissions:
+  tools: *id001
+  scripts: []
+  network: none
+  filesystem:
+    read: []
+    write:
+    - ''
+  approval_required_for: []
+composition:
+  composes: []
+  conflicts: []
+governs:
+- research
+- write
+output:
+  sections:
+  - Hotspots
+  - Evidence
+  - Proposal
+  - Risks and sequencing
+budget:
+  max_tokens_per_run: 30000
+  max_script_seconds: null
+evals:
+  suite: evals/cases.yaml
+  holdout: null
+  min_pass: 0.9

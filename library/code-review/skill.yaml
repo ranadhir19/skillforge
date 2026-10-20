@@ -1,0 +1,46 @@
+apiVersion: skillforge/v1
+name: code-review
+version: 1.0.0
+lifecycle: active
+triggers:
+  examples:
+  - Review this user lookup helper for security problems
+  - 'Code review: check the fetch helper and query builder'
+  counter_examples:
+  - Fix the bug in the checkout totals test
+  - Write a handoff for the review work
+requires:
+  tools: &id001
+  - native:doc_search
+  - native:file_writer
+  capabilities:
+  - tool_calling
+  min_context_tokens: 8000
+permissions:
+  tools: *id001
+  scripts: []
+  network: none
+  filesystem:
+    read: []
+    write:
+    - ''
+  approval_required_for: []
+composition:
+  composes: []
+  conflicts: []
+governs:
+- research
+- write
+output:
+  sections:
+  - Findings
+  - Severity
+  - Required fixes
+  - Nits
+budget:
+  max_tokens_per_run: 30000
+  max_script_seconds: null
+evals:
+  suite: evals/cases.yaml
+  holdout: null
+  min_pass: 0.9

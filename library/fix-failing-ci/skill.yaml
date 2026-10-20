@@ -1,0 +1,47 @@
+apiVersion: skillforge/v1
+name: fix-failing-ci
+version: 1.0.0
+lifecycle: active
+triggers:
+  examples:
+  - "CI run 8812 is red \u2014 find the first failure and the fix"
+  - The pipeline failed again, work out why
+  counter_examples:
+  - Review the code in the failing module
+  - Diagnose the production outage from last week
+requires:
+  tools: &id001
+  - native:doc_search
+  - native:file_writer
+  capabilities:
+  - tool_calling
+  min_context_tokens: 8000
+permissions:
+  tools: *id001
+  scripts: []
+  network: none
+  filesystem:
+    read: []
+    write:
+    - ''
+  approval_required_for: []
+composition:
+  composes:
+  - diagnosing-bugs
+  conflicts: []
+governs:
+- research
+- write
+output:
+  sections:
+  - First failure
+  - Classification
+  - Minimal fix
+  - Proof it worked
+budget:
+  max_tokens_per_run: 30000
+  max_script_seconds: null
+evals:
+  suite: evals/cases.yaml
+  holdout: null
+  min_pass: 0.9

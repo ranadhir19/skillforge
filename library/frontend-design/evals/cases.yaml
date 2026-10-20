@@ -1,0 +1,32 @@
+cases:
+- id: t1
+  kind: trigger
+  task: 'Design the settings page: layout, components and states'
+  should_fire: true
+- id: t2
+  kind: trigger
+  task: Plan the UI for the new dashboard screen
+  should_fire: true
+- id: t3
+  kind: trigger
+  task: Write the test plan for the settings page
+  should_fire: false
+- id: t4
+  kind: trigger
+  task: Build the dashboard now
+  should_fire: false
+- id: k1
+  kind: task
+  task:
+    goal: Design a revenue dashboard screen
+    sub_questions:
+    - metrics table revenue costs units regions months
+    title: 'Design: revenue dashboard'
+  expect:
+    sections:
+    - Layout
+    - Components
+    - States
+    - Accessibility
+    - Open questions
+    min_chars: 300

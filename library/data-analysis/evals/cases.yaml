@@ -1,0 +1,49 @@
+cases:
+- id: t1
+  kind: trigger
+  task: "Analyse Q1 revenue \u2014 totals, North region, costs and net"
+  should_fire: true
+- id: t2
+  kind: trigger
+  task: What were total units sold and net revenue in Q1?
+  should_fire: true
+- id: t3
+  kind: trigger
+  task: Draft a memo about the sales team
+  should_fire: false
+- id: t4
+  kind: trigger
+  task: Extract the fields from this onboarding form
+  should_fire: false
+- id: k1
+  kind: task
+  task:
+    goal: 'Analyse Q1 2026 revenue: total revenue, North region, total costs, units, net revenue'
+    sub_questions:
+    - metrics table revenue costs units net revenue defined
+    lookups:
+    - label: total revenue
+      metric: revenue_usd
+    - label: north revenue
+      metric: revenue_usd
+      region: North
+    - label: total costs
+      metric: costs_usd
+    - label: units sold
+      metric: units
+    computations:
+    - label: net revenue
+      expression: '{total revenue} - {total costs}'
+      refs: true
+    title: Q1 2026 revenue analysis
+  expect:
+    sections:
+    - Question
+    - Figures
+    - Verification
+    - Notes
+    contains_all:
+    - '{corpus:revenue_all}'
+    - '{corpus:revenue_north}'
+    - '{corpus:net_revenue}'
+    min_chars: 300

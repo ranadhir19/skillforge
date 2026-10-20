@@ -1,0 +1,34 @@
+cases:
+- id: t1
+  kind: trigger
+  task: "CI run 8812 is red \u2014 find the first failure and the fix"
+  should_fire: true
+- id: t2
+  kind: trigger
+  task: The pipeline failed again, work out why
+  should_fire: true
+- id: t3
+  kind: trigger
+  task: Review the code in the failing module
+  should_fire: false
+- id: t4
+  kind: trigger
+  task: Diagnose the production outage from last week
+  should_fire: false
+- id: k1
+  kind: task
+  task:
+    goal: 'Fix CI run 8812: first failure, classification, fix'
+    sub_questions:
+    - CI run 8812 integration-tests FAIL first failure test_checkout_totals rounding drift
+    title: 'CI fix: run 8812'
+  expect:
+    sections:
+    - First failure
+    - Classification
+    - Minimal fix
+    - Proof it worked
+    contains_all:
+    - test_checkout_totals
+    - rounding
+    min_chars: 300

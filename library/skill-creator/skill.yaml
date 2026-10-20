@@ -1,0 +1,47 @@
+apiVersion: skillforge/v1
+name: skill-creator
+version: 1.0.0
+lifecycle: active
+triggers:
+  examples:
+  - Turn this weekly report I keep writing into a reusable skill
+  - Create a new skill that drafts release notes from merged changes
+  counter_examples:
+  - Write this week's release notes for me
+  - Explain how skills work in this platform
+requires:
+  tools: &id001
+  - native:doc_search
+  - native:file_writer
+  capabilities:
+  - tool_calling
+  min_context_tokens: 8000
+permissions:
+  tools: *id001
+  scripts: []
+  network: none
+  filesystem:
+    read: []
+    write:
+    - ''
+  approval_required_for: []
+composition:
+  composes:
+  - verification-before-completion
+  conflicts: []
+governs:
+- research
+- write
+output:
+  sections:
+  - Package layout
+  - Manifest decisions
+  - Starter evals
+  - Trial checklist
+budget:
+  max_tokens_per_run: 30000
+  max_script_seconds: null
+evals:
+  suite: evals/cases.yaml
+  holdout: null
+  min_pass: 0.9

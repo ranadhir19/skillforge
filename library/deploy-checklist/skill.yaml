@@ -1,0 +1,47 @@
+apiVersion: skillforge/v1
+name: deploy-checklist
+version: 1.0.0
+lifecycle: active
+triggers:
+  examples:
+  - Give me the deploy checklist for the cache config change
+  - "We're pushing a config change tonight \u2014 checklist and rollback plan"
+  counter_examples:
+  - Diagnose the outage the config push caused
+  - Write the release announcement
+requires:
+  tools: &id001
+  - native:doc_search
+  - native:file_writer
+  capabilities:
+  - tool_calling
+  min_context_tokens: 8000
+permissions:
+  tools: *id001
+  scripts: []
+  network: none
+  filesystem:
+    read: []
+    write:
+    - ''
+  approval_required_for:
+  - publish
+composition:
+  composes: []
+  conflicts: []
+governs:
+- research
+- write
+output:
+  sections:
+  - Pre-flight
+  - Deploy steps
+  - Smoke tests
+  - Rollback
+budget:
+  max_tokens_per_run: 30000
+  max_script_seconds: null
+evals:
+  suite: evals/cases.yaml
+  holdout: null
+  min_pass: 0.9

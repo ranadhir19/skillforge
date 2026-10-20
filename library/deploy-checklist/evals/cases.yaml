@@ -1,0 +1,33 @@
+cases:
+- id: t1
+  kind: trigger
+  task: Give me the deploy checklist for the cache config change
+  should_fire: true
+- id: t2
+  kind: trigger
+  task: "We're pushing a config change tonight \u2014 checklist and rollback plan"
+  should_fire: true
+- id: t3
+  kind: trigger
+  task: Diagnose the outage the config push caused
+  should_fire: false
+- id: t4
+  kind: trigger
+  task: Write the release announcement
+  should_fire: false
+- id: k1
+  kind: task
+  task:
+    goal: Deploy checklist for the session-cache config change
+    sub_questions:
+    - config push cache TTL invalidation second approver action items
+    title: 'Deploy checklist: cache config'
+  expect:
+    sections:
+    - Pre-flight
+    - Deploy steps
+    - Smoke tests
+    - Rollback
+    contains_all:
+    - cache-invalidation
+    min_chars: 300

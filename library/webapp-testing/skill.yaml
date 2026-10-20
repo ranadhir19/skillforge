@@ -1,0 +1,46 @@
+apiVersion: skillforge/v1
+name: webapp-testing
+version: 1.0.0
+lifecycle: active
+triggers:
+  examples:
+  - Write the test plan for the new checkout flow before we ship it
+  - What should we test before releasing the settings page redesign?
+  counter_examples:
+  - Ship the checkout flow now
+  - Review the checkout code
+requires:
+  tools: &id001
+  - native:doc_search
+  - native:file_writer
+  capabilities:
+  - tool_calling
+  min_context_tokens: 8000
+permissions:
+  tools: *id001
+  scripts: []
+  network: none
+  filesystem:
+    read: []
+    write:
+    - ''
+  approval_required_for: []
+composition:
+  composes: []
+  conflicts: []
+governs:
+- research
+- write
+output:
+  sections:
+  - Scope
+  - Test cases
+  - Unhappy paths
+  - Evidence required
+budget:
+  max_tokens_per_run: 30000
+  max_script_seconds: null
+evals:
+  suite: evals/cases.yaml
+  holdout: null
+  min_pass: 0.9

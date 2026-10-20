@@ -1,0 +1,47 @@
+apiVersion: skillforge/v1
+name: handoff
+version: 1.0.0
+lifecycle: active
+triggers:
+  examples:
+  - Write a handoff for the payments outage investigation before I log off
+  - Hand this work over to the on-call engineer
+  counter_examples:
+  - Summarise the payments outage postmortem
+  - Draft the incident update for stakeholders
+requires:
+  tools: &id001
+  - native:doc_search
+  - native:file_writer
+  capabilities:
+  - tool_calling
+  min_context_tokens: 8000
+permissions:
+  tools: *id001
+  scripts: []
+  network: none
+  filesystem:
+    read: []
+    write:
+    - ''
+  approval_required_for: []
+composition:
+  composes: []
+  conflicts:
+  - internal-comms
+governs:
+- write
+output:
+  sections:
+  - Context
+  - Current state
+  - What was tried
+  - Next steps
+  - Risks and open questions
+budget:
+  max_tokens_per_run: 30000
+  max_script_seconds: null
+evals:
+  suite: evals/cases.yaml
+  holdout: null
+  min_pass: 0.9

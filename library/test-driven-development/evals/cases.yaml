@@ -1,0 +1,34 @@
+cases:
+- id: t1
+  kind: trigger
+  task: Fix the checkout totals rounding bug test-first
+  should_fire: true
+- id: t2
+  kind: trigger
+  task: Implement the retry budget change with TDD
+  should_fire: true
+- id: t3
+  kind: trigger
+  task: Explain the CI failure in run 8812
+  should_fire: false
+- id: t4
+  kind: trigger
+  task: Review this diff for problems
+  should_fire: false
+- id: k1
+  kind: task
+  task:
+    goal: Write the failing test for the checkout totals rounding bug, then the fix plan
+    sub_questions:
+    - CI run 8812 integration-tests FAIL test_checkout_totals rounding aggregation
+    title: 'TDD: checkout totals rounding'
+  expect:
+    sections:
+    - Failing test
+    - Expected behaviour
+    - Minimal change
+    - Green check
+    - Refactor notes
+    contains_all:
+    - test_checkout_totals
+    min_chars: 300

@@ -1,0 +1,48 @@
+apiVersion: skillforge/v1
+name: pdf-extract-and-fill
+version: 1.0.0
+lifecycle: active
+triggers:
+  examples:
+  - Extract the applicant and spend fields from this vendor onboarding form
+  - Pull the key fields out of the filled form
+  counter_examples:
+  - Analyse the Q1 metrics spreadsheet
+  - Draft a summary of the vendor policy
+requires:
+  tools: &id001
+  - native:doc_search
+  - native:script_runner
+  - native:file_writer
+  capabilities:
+  - tool_calling
+  min_context_tokens: 8000
+permissions:
+  tools: *id001
+  scripts:
+  - scripts/extract_fields.py
+  network: none
+  filesystem:
+    read: []
+    write:
+    - ''
+  approval_required_for: []
+composition:
+  composes: []
+  conflicts: []
+governs:
+- research
+- script
+- write
+output:
+  sections:
+  - Extracted fields
+  - Source check
+  - Missing or ambiguous
+budget:
+  max_tokens_per_run: 30000
+  max_script_seconds: 10
+evals:
+  suite: evals/cases.yaml
+  holdout: null
+  min_pass: 0.9

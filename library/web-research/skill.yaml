@@ -1,0 +1,47 @@
+apiVersion: skillforge/v1
+name: web-research
+version: 1.0.0
+lifecycle: active
+triggers:
+  examples:
+  - 'Research the remote work policy: days, core hours, equipment'
+  - Find out what the handbook says about remote work from multiple pages
+  counter_examples:
+  - Draft the remote work announcement
+  - Analyse the Q1 metrics
+requires:
+  tools: &id001
+  - native:doc_search
+  - native:file_writer
+  capabilities:
+  - tool_calling
+  min_context_tokens: 8000
+permissions:
+  tools: *id001
+  scripts: []
+  network: none
+  filesystem:
+    read: []
+    write:
+    - ''
+  approval_required_for: []
+composition:
+  composes: []
+  conflicts: []
+governs:
+- research
+- synthesize
+- write
+output:
+  sections:
+  - Answer
+  - Evidence
+  - Counter-evidence and limits
+  - Sources
+budget:
+  max_tokens_per_run: 30000
+  max_script_seconds: null
+evals:
+  suite: evals/cases.yaml
+  holdout: null
+  min_pass: 0.9

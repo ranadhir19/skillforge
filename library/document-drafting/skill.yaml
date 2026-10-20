@@ -1,0 +1,46 @@
+apiVersion: skillforge/v1
+name: document-drafting
+version: 1.0.0
+lifecycle: active
+triggers:
+  examples:
+  - Draft a memo on the remote work policy from the handbook
+  - Write up the refund policy as a customer-facing document
+  counter_examples:
+  - Analyse the Q1 revenue numbers
+  - Grill me on the memo requirements
+requires:
+  tools: &id001
+  - native:doc_search
+  - native:file_writer
+  capabilities:
+  - tool_calling
+  min_context_tokens: 8000
+permissions:
+  tools: *id001
+  scripts: []
+  network: none
+  filesystem:
+    read: []
+    write:
+    - ''
+  approval_required_for: []
+composition:
+  composes: []
+  conflicts: []
+governs:
+- research
+- write
+output:
+  sections:
+  - Purpose
+  - Key points
+  - Detail
+  - Sources
+budget:
+  max_tokens_per_run: 30000
+  max_script_seconds: null
+evals:
+  suite: evals/cases.yaml
+  holdout: null
+  min_pass: 0.9

@@ -1,0 +1,182 @@
+{
+  "E1_trigger_quality": {
+    "tp": 40,
+    "fp": 0,
+    "fn": 0,
+    "tn": 40,
+    "precision": 1.0,
+    "recall": 1.0,
+    "per_skill": {
+      "code-review": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      },
+      "data-analysis": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      },
+      "deploy-checklist": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      },
+      "diagnosing-bugs": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      },
+      "document-drafting": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      },
+      "fix-failing-ci": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      },
+      "frontend-design": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      },
+      "grill-me": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      },
+      "handoff": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      },
+      "improve-codebase-architecture": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      },
+      "internal-comms": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      },
+      "pdf-extract-and-fill": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      },
+      "postgres-best-practices": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      },
+      "resolve-merge-conflict": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      },
+      "skill-creator": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      },
+      "spreadsheet-analysis": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      },
+      "test-driven-development": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      },
+      "verification-before-completion": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      },
+      "web-research": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      },
+      "webapp-testing": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      }
+    }
+  },
+  "E2_eval_matrix": {
+    "stub-pro": {
+      "total": 100,
+      "passed": 100,
+      "pass_rate": 1.0,
+      "failing": []
+    },
+    "stub-basic": {
+      "total": 100,
+      "passed": 98,
+      "pass_rate": 0.98,
+      "failing": [
+        "data-analysis/k1",
+        "verification-before-completion/k1"
+      ]
+    }
+  },
+  "E3_gates": {
+    "approved_status": "completed",
+    "denied_status": "blocked_approval",
+    "denied_publish_trace": [
+      "denied"
+    ]
+  },
+  "E4_creation": {
+    "ok": true,
+    "stage": "registered",
+    "lifecycle": "shadow",
+    "trial": "3/3",
+    "seconds": 0.69,
+    "shadow_primary": null,
+    "shadow_hits": [
+      "unit-economics-snapshot"
+    ],
+    "active_primary": "unit-economics-snapshot",
+    "active_status": "completed",
+    "figures_verified": true
+  },
+  "E5_vanilla_import": {
+    "lifecycle": "imported",
+    "valid": true,
+    "warnings": 1,
+    "permissions": [
+      "Tools: none",
+      "Scripts it may run: none",
+      "Network: none",
+      "Files it may write: sandbox only",
+      "Needs human approval for: nothing"
+    ]
+  }
+}

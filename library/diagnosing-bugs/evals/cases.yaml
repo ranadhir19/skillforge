@@ -1,0 +1,37 @@
+cases:
+- id: t1
+  kind: trigger
+  task: Diagnose why checkout success dropped during the payments outage
+  should_fire: true
+- id: t2
+  kind: trigger
+  task: "Something is wrong with session handling \u2014 find the root cause"
+  should_fire: true
+- id: t3
+  kind: trigger
+  task: Write the stakeholder update about the outage
+  should_fire: false
+- id: t4
+  kind: trigger
+  task: What is the refund policy for subscriptions?
+  should_fire: false
+- id: k1
+  kind: task
+  task:
+    goal: 'Diagnose the payments outage: root cause and fix'
+    sub_questions:
+    - payments outage postmortem root cause session-cache TTL 86400 config push 14:02
+    title: 'Diagnosis: payments outage'
+  expect:
+    sections:
+    - Reproduction
+    - Evidence
+    - Hypothesis
+    - Root cause
+    - Fix
+    - Regression check
+    contains_all:
+    - session-cache
+    - '86400'
+    - 300 seconds
+    min_chars: 300

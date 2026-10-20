@@ -1,0 +1,34 @@
+cases:
+- id: t1
+  kind: trigger
+  task: "I want a dashboard, sort of, for the team \u2014 grill me on what it must do"
+  should_fire: true
+- id: t2
+  kind: trigger
+  task: This feature request is vague, question me until it's precise
+  should_fire: true
+- id: t3
+  kind: trigger
+  task: Write the incident summary for INC-2041
+  should_fire: false
+- id: t4
+  kind: trigger
+  task: What were Q1 sales by region?
+  should_fire: false
+- id: k1
+  kind: task
+  task:
+    goal: 'Grill me: I want a tool that watches sales somehow'
+    sub_questions:
+    - metrics table revenue costs units regions months
+    title: 'Grilling: sales watcher'
+  expect:
+    sections:
+    - What I heard
+    - Questions on scope
+    - Questions on inputs and outputs
+    - Questions on constraints
+    - Definition of done
+    regex:
+    - '## Questions on scope'
+    min_chars: 300

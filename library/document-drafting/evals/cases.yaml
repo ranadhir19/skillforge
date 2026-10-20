@@ -1,0 +1,34 @@
+cases:
+- id: t1
+  kind: trigger
+  task: Draft a memo on the remote work policy from the handbook
+  should_fire: true
+- id: t2
+  kind: trigger
+  task: Write up the refund policy as a customer-facing document
+  should_fire: true
+- id: t3
+  kind: trigger
+  task: Analyse the Q1 revenue numbers
+  should_fire: false
+- id: t4
+  kind: trigger
+  task: Grill me on the memo requirements
+  should_fire: false
+- id: k1
+  kind: task
+  task:
+    goal: Draft a customer-facing document on the refund policy
+    sub_questions:
+    - refund policy 30 days unused credits never expire original payment method
+    title: Refund policy, explained
+  expect:
+    sections:
+    - Purpose
+    - Key points
+    - Detail
+    - Sources
+    contains_all:
+    - 30 days
+    - never expire
+    min_chars: 300

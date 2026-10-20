@@ -1,0 +1,35 @@
+cases:
+- id: t1
+  kind: trigger
+  task: Resolve the conflict in the retry configuration, both sides have a point
+  should_fire: true
+- id: t2
+  kind: trigger
+  task: "Merge conflict in the config file \u2014 work out what each side wanted"
+  should_fire: true
+- id: t3
+  kind: trigger
+  task: Change max_retries to 3 in the config
+  should_fire: false
+- id: t4
+  kind: trigger
+  task: Review the retry logic code
+  should_fire: false
+- id: k1
+  kind: task
+  task:
+    goal: Resolve the retry configuration merge conflict
+    sub_questions:
+    - merge conflict retry configuration max_retries payments API retry storms vendor webhook flaky deliveries
+    title: 'Merge conflict: retry config'
+  expect:
+    sections:
+    - Side A intent
+    - Side B intent
+    - Resolution
+    - What needs a human decision
+    contains_all:
+    - max_retries
+    - payments API
+    - webhook
+    min_chars: 300

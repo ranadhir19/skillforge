@@ -1,0 +1,33 @@
+cases:
+- id: t1
+  kind: trigger
+  task: Write the test plan for the new checkout flow before we ship it
+  should_fire: true
+- id: t2
+  kind: trigger
+  task: What should we test before releasing the settings page redesign?
+  should_fire: true
+- id: t3
+  kind: trigger
+  task: Ship the checkout flow now
+  should_fire: false
+- id: t4
+  kind: trigger
+  task: Review the checkout code
+  should_fire: false
+- id: k1
+  kind: task
+  task:
+    goal: Test plan for the checkout flow changes
+    sub_questions:
+    - checkout success session-cache payment tokens failure
+    title: 'Test plan: checkout flow'
+  expect:
+    sections:
+    - Scope
+    - Test cases
+    - Unhappy paths
+    - Evidence required
+    contains_all:
+    - checkout
+    min_chars: 300

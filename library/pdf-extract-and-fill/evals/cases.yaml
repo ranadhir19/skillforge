@@ -1,0 +1,44 @@
+cases:
+- id: t1
+  kind: trigger
+  task: Extract the applicant and spend fields from this vendor onboarding form
+  should_fire: true
+- id: t2
+  kind: trigger
+  task: Pull the key fields out of the filled form
+  should_fire: true
+- id: t3
+  kind: trigger
+  task: Analyse the Q1 metrics spreadsheet
+  should_fire: false
+- id: t4
+  kind: trigger
+  task: Draft a summary of the vendor policy
+  should_fire: false
+- id: k1
+  kind: task
+  task:
+    goal: Extract the key fields from the vendor onboarding form
+    script_steps:
+    - skill: pdf-extract-and-fill
+      script: scripts/extract_fields.py
+      payload:
+        asset: vendor_form.txt
+        fields:
+        - applicant_name
+        - vendor
+        - annual_spend_usd
+        - start_date
+      label: extracted fields
+    title: 'Form extraction: vendor onboarding'
+  expect:
+    sections:
+    - Extracted fields
+    - Source check
+    - Missing or ambiguous
+    contains_all:
+    - Priya Nair
+    - Northwind Traders
+    - '48200'
+    - '2026-11-01'
+    min_chars: 200

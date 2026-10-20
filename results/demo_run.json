@@ -1,0 +1,366 @@
+{
+  "task": "demo-q1",
+  "approved_run": {
+    "task_id": "demo-q1",
+    "status": "completed",
+    "plan": {
+      "task_id": "demo-q1",
+      "goal": "Analyse Q1 2026 revenue: total revenue, the North region total, total costs, units sold, and net revenue, then write up the findings.",
+      "origin": "dynamic",
+      "steps": [
+        {
+          "id": "research_1",
+          "agent": "executor",
+          "action": "research",
+          "instruction": "What does the metrics table contain and how is net revenue defined?",
+          "skill": "data-analysis",
+          "depends_on": [],
+          "params": {},
+          "optional": false,
+          "sensitive": false
+        },
+        {
+          "id": "lookup_1",
+          "agent": "executor",
+          "action": "lookup",
+          "instruction": "Look up total revenue",
+          "skill": "data-analysis",
+          "depends_on": [],
+          "params": {
+            "label": "total revenue",
+            "metric": "revenue_usd"
+          },
+          "optional": false,
+          "sensitive": false
+        },
+        {
+          "id": "lookup_2",
+          "agent": "executor",
+          "action": "lookup",
+          "instruction": "Look up north revenue",
+          "skill": "data-analysis",
+          "depends_on": [],
+          "params": {
+            "label": "north revenue",
+            "metric": "revenue_usd",
+            "region": "North"
+          },
+          "optional": false,
+          "sensitive": false
+        },
+        {
+          "id": "lookup_3",
+          "agent": "executor",
+          "action": "lookup",
+          "instruction": "Look up total costs",
+          "skill": "data-analysis",
+          "depends_on": [],
+          "params": {
+            "label": "total costs",
+            "metric": "costs_usd"
+          },
+          "optional": false,
+          "sensitive": false
+        },
+        {
+          "id": "lookup_4",
+          "agent": "executor",
+          "action": "lookup",
+          "instruction": "Look up units sold",
+          "skill": "data-analysis",
+          "depends_on": [],
+          "params": {
+            "label": "units sold",
+            "metric": "units"
+          },
+          "optional": false,
+          "sensitive": false
+        },
+        {
+          "id": "compute_1",
+          "agent": "executor",
+          "action": "compute",
+          "instruction": "Compute net revenue",
+          "skill": "data-analysis",
+          "depends_on": [
+            "lookup_1",
+            "lookup_2",
+            "lookup_3",
+            "lookup_4"
+          ],
+          "params": {
+            "label": "net revenue",
+            "expression": "{total revenue} - {total costs}",
+            "refs": true,
+            "_ref_labels": {
+              "total revenue": "lookup_1",
+              "north revenue": "lookup_2",
+              "total costs": "lookup_3",
+              "units sold": "lookup_4",
+              "net revenue": "compute_1"
+            }
+          },
+          "optional": false,
+          "sensitive": false
+        },
+        {
+          "id": "synthesize",
+          "agent": "executor",
+          "action": "synthesize",
+          "instruction": "Synthesize findings for: Analyse Q1 2026 revenue: total revenue, the North region total, total costs, units sold, and net revenue, then write up the findings.",
+          "skill": "data-analysis",
+          "depends_on": [
+            "research_1",
+            "lookup_1",
+            "lookup_2",
+            "lookup_3",
+            "lookup_4",
+            "compute_1"
+          ],
+          "params": {},
+          "optional": false,
+          "sensitive": false
+        },
+        {
+          "id": "write",
+          "agent": "executor",
+          "action": "write",
+          "instruction": "Write the deliverable: Q1 2026 revenue analysis",
+          "skill": "data-analysis",
+          "depends_on": [
+            "synthesize"
+          ],
+          "params": {
+            "title": "Q1 2026 revenue analysis",
+            "output_sections": [
+              "Question",
+              "Figures",
+              "Verification",
+              "Notes"
+            ]
+          },
+          "optional": false,
+          "sensitive": false
+        },
+        {
+          "id": "publish",
+          "agent": "executor",
+          "action": "publish",
+          "instruction": "Publish the deliverable to q1-revenue-analysis.md",
+          "skill": "data-analysis",
+          "depends_on": [
+            "write"
+          ],
+          "params": {
+            "filename": "q1-revenue-analysis.md"
+          },
+          "optional": false,
+          "sensitive": true
+        }
+      ]
+    },
+    "plan_hash": "ac100ff99f79ffe7",
+    "traces": [
+      {
+        "step_id": "research_1",
+        "agent": "executor",
+        "action": "research",
+        "skill": "data-analysis",
+        "provider": "stub-pro",
+        "status": "ok",
+        "tokens_in": 317,
+        "tokens_out": 241,
+        "cost_usd": 0.004566,
+        "latency_s": 0.22,
+        "attempts": 1,
+        "detail": ""
+      },
+      {
+        "step_id": "lookup_1",
+        "agent": "executor",
+        "action": "lookup",
+        "skill": "data-analysis",
+        "provider": "stub-pro",
+        "status": "ok",
+        "tokens_in": 305,
+        "tokens_out": 6,
+        "cost_usd": 0.001005,
+        "latency_s": 0.08,
+        "attempts": 1,
+        "detail": ""
+      },
+      {
+        "step_id": "lookup_2",
+        "agent": "executor",
+        "action": "lookup",
+        "skill": "data-analysis",
+        "provider": "stub-pro",
+        "status": "ok",
+        "tokens_in": 305,
+        "tokens_out": 6,
+        "cost_usd": 0.001005,
+        "latency_s": 0.08,
+        "attempts": 1,
+        "detail": ""
+      },
+      {
+        "step_id": "lookup_3",
+        "agent": "executor",
+        "action": "lookup",
+        "skill": "data-analysis",
+        "provider": "stub-pro",
+        "status": "ok",
+        "tokens_in": 305,
+        "tokens_out": 5,
+        "cost_usd": 0.00099,
+        "latency_s": 0.08,
+        "attempts": 1,
+        "detail": ""
+      },
+      {
+        "step_id": "lookup_4",
+        "agent": "executor",
+        "action": "lookup",
+        "skill": "data-analysis",
+        "provider": "stub-pro",
+        "status": "ok",
+        "tokens_in": 305,
+        "tokens_out": 5,
+        "cost_usd": 0.00099,
+        "latency_s": 0.08,
+        "attempts": 1,
+        "detail": ""
+      },
+      {
+        "step_id": "compute_1",
+        "agent": "executor",
+        "action": "compute",
+        "skill": "data-analysis",
+        "provider": "stub-pro",
+        "status": "ok",
+        "tokens_in": 570,
+        "tokens_out": 5,
+        "cost_usd": 0.001785,
+        "latency_s": 0.12,
+        "attempts": 1,
+        "detail": ""
+      },
+      {
+        "step_id": "synthesize",
+        "agent": "executor",
+        "action": "synthesize",
+        "skill": "data-analysis",
+        "provider": "stub-pro",
+        "status": "ok",
+        "tokens_in": 610,
+        "tokens_out": 240,
+        "cost_usd": 0.00543,
+        "latency_s": 0.18,
+        "attempts": 1,
+        "detail": ""
+      },
+      {
+        "step_id": "write",
+        "agent": "executor",
+        "action": "write",
+        "skill": "data-analysis",
+        "provider": "stub-pro",
+        "status": "ok",
+        "tokens_in": 823,
+        "tokens_out": 551,
+        "cost_usd": 0.010734,
+        "latency_s": 0.1,
+        "attempts": 1,
+        "detail": ""
+      },
+      {
+        "step_id": "publish",
+        "agent": "executor",
+        "action": "publish",
+        "skill": "data-analysis",
+        "provider": "stub-pro",
+        "status": "ok",
+        "tokens_in": 1375,
+        "tokens_out": 20,
+        "cost_usd": 0.004425,
+        "latency_s": 0.05,
+        "attempts": 1,
+        "detail": ""
+      }
+    ],
+    "replans": [],
+    "total_tokens": 5994,
+    "total_cost_usd": 0.03093,
+    "final_output": "# Q1 2026 revenue analysis\n\n## Question\nnet revenue = 174867.33\n\ntotal revenue = 211005.75\n\nnorth revenue = 64551.50\n\ntotal costs = 36138.42\n\nunits sold = 4174.00\n\n[c-metrics-note] The metrics table holds monthly regional figures for Q1 2026. revenue_usd is gross revenue in USD; costs_usd is platform cost; units is units sold. Net revenue is revenue minus costs.\n[c-diff] def get_user(conn, user_id):\n    q = \"SELECT * FROM users WHERE id = \" + user_id\n    return conn.execute(q).fetchone()\n\ndef fetch(url):\n    return requests.get(url).json()\nIssues a reviewer should catch: the query is built by string concatenation with an unescaped user_id (SQL injection), and requests.get is called without a timeout.\n[c-schema] CREATE TABLE orders (id BIGSERIAL PRIMARY KEY, customer_id BIGINT REFERENCES customers(id), status TEXT, total NUMERIC(12,2), created_at TIMESTAMPTZ DEFAULT now()); CREATE TABLE order_items (order_id BIGINT REFERENCES orders(id), sku TEXT, qty INT); Review notes: customer_id and order_id are foreign keys with no index, so joins and cascades scan sequentially; status is free TEXT with no check constraint.\n\nnet revenue = 174867.33 total revenue = 211005.75 north revenue = 64551.50 total costs = 36138.42 units sold = 4174.00 [c-metrics-note] The metrics table holds monthly regional figures for Q1 2026. [c-diff] def get_user(conn, user_id):     q = \"SELECT * FROM users WHERE id = \" + user_id     return conn.execute(q).fetchone()  def fetch(url):     return requests.get(url).json() Issues a reviewer should catch: the query is built by string concatenation with an unescaped user_id (SQL injection), and requests.get is called without a timeout. [c-schema] CREATE TABLE orders (id BIGSERIAL PRIMARY KEY, customer_id BIGINT REFERENCES customers(id), status TEXT, total NUMERIC(12,2), created_at TIMESTAMPTZ DEFAULT now()); CREATE TABLE order_items (order_id BIGINT REFERENCES orders(id), sku TEXT, qty INT); Review notes: customer_id and order_id are foreign keys with no index, so joins and cascades scan sequentially; status is free TEXT with no check constraint.\n\n## Figures\nnet revenue = 174867.33\n\n## Verification\ntotal revenue = 211005.75\n\n## Notes\nnorth revenue = 64551.50\n",
+    "resolution_log": [
+      "stage1 shortlist: ['data-analysis', 'spreadsheet-analysis', 'handoff', 'test-driven-development', 'document-drafting', 'frontend-design', 'internal-comms', 'webapp-testing', 'verification-before-completion', 'skill-creator', 'fix-failing-ci', 'deploy-checklist']",
+      "pin: data-analysis forced active (score 0.4679)",
+      "excluded: handoff \u2014 score 0.0802 below threshold 0.3 (example 0.086, counter 0.0)",
+      "excluded: webapp-testing \u2014 score 0.0581 below threshold 0.3 (example 0.086, counter 0.0)",
+      "excluded: test-driven-development \u2014 score 0.0409 below threshold 0.3 (example 0.0, counter 0.0)",
+      "excluded: fix-failing-ci \u2014 score 0.0037 below threshold 0.3 (example 0.0, counter 0.0)",
+      "excluded: internal-comms \u2014 score -0.0201 below threshold 0.3 (example 0.105, counter 0.129)",
+      "excluded: frontend-design \u2014 score -0.0966 below threshold 0.3 (example 0.0, counter 0.115)",
+      "excluded: skill-creator \u2014 score -0.0976 below threshold 0.3 (example 0.0, counter 0.115)",
+      "excluded: spreadsheet-analysis \u2014 score -0.1076 below threshold 0.3 (example 0.39, counter 0.422)",
+      "excluded: verification-before-completion \u2014 score -0.1227 below threshold 0.3 (example 0.172, counter 0.258)",
+      "excluded: deploy-checklist \u2014 score -0.1308 below threshold 0.3 (example 0.0, counter 0.149)",
+      "excluded: document-drafting \u2014 score -0.213 below threshold 0.3 (example 0.183, counter 0.387)"
+    ]
+  },
+  "denied_status": "blocked_approval",
+  "basic_status": "completed",
+  "creation": {
+    "ok": true,
+    "stage": "registered",
+    "name": "unit-economics-snapshot",
+    "draft_dir": "/tmp/skillforge-draft-unit-economics-snapshot-2y43dtq_/unit-economics-snapshot",
+    "validation": {
+      "path": "/tmp/skillforge-draft-unit-economics-snapshot-2y43dtq_/unit-economics-snapshot",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "trial": {
+      "skill": "unit-economics-snapshot",
+      "provider": "stub-pro",
+      "total": 3,
+      "passed": 3,
+      "pass_rate": 1.0,
+      "results": [
+        {
+          "case_id": "t1",
+          "kind": "trigger",
+          "passed": true,
+          "detail": "fired=True expected=True",
+          "holdout": false
+        },
+        {
+          "case_id": "t2",
+          "kind": "trigger",
+          "passed": true,
+          "detail": "fired=False expected=False",
+          "holdout": false
+        },
+        {
+          "case_id": "k1",
+          "kind": "task",
+          "passed": true,
+          "detail": "expectations met",
+          "holdout": false
+        }
+      ]
+    },
+    "permission_summary": [
+      "Tools: native:doc_search, native:data_lookup, native:calculator, native:file_writer",
+      "Scripts it may run: none",
+      "Network: none",
+      "Files it may write: ",
+      "Needs human approval for: nothing"
+    ],
+    "lifecycle": "shadow",
+    "detail": "registered as shadow; trial 3/3 passed"
+  },
+  "episodes_in_store": 1,
+  "audit_chain_valid": true
+}

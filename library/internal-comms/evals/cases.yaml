@@ -1,0 +1,33 @@
+cases:
+- id: t1
+  kind: trigger
+  task: Write the stakeholder update about the payments outage
+  should_fire: true
+- id: t2
+  kind: trigger
+  task: Draft an incident update for the whole company
+  should_fire: true
+- id: t3
+  kind: trigger
+  task: Write a handoff for the on-call engineer
+  should_fire: false
+- id: t4
+  kind: trigger
+  task: Diagnose the outage root cause
+  should_fire: false
+- id: k1
+  kind: task
+  task:
+    goal: Stakeholder update on the payments outage
+    sub_questions:
+    - payments outage checkout success 61 percent 47 minutes resolution cache flushed
+    title: 'Update: payments outage'
+  expect:
+    sections:
+    - Summary
+    - Impact
+    - Current status
+    - Next update
+    contains_all:
+    - 61 percent
+    min_chars: 300

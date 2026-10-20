@@ -1,0 +1,6 @@
+FORM vendor-onboarding
+applicant_name: Priya Nair
+vendor: Northwind Traders
+annual_spend_usd: 48200
+start_date: 2026-11-01
+approver: Marcus Lee
