@@ -53,6 +53,33 @@ def test_health(client):
     assert body["audit_chain_valid"] is True
 
 
+def test_frontend_health_contract(client):
+    """Pin the REST /health <-> UI header contract.
+
+    Regression: App.jsx read health.auditChainValid (camelCase),
+    but /health emits snake_case keys (audit_chain_valid) and the
+    frontend's rest() helper passes the parsed JSON through with
+    no case conversion -- so the value was always undefined and
+    the header always rendered "audit chain BROKEN" even while
+    the API reported a valid chain. (GraphQL fields ARE camelized
+    by Strawberry -- schema.py's audit_chain_valid resolver is
+    auditChainValid over GraphQL -- which is how the wrong
+    convention got applied to the one REST read in the header.)
+    """
+    body = client.get("/health").json()
+    assert body["audit_chain_valid"] is True
+    app_jsx = open(os.path.join(ROOT, "frontend", "src", "App.jsx"),
+                   encoding="utf-8").read()
+    # The header must read the key /health actually emits...
+    assert "health.audit_chain_valid" in app_jsx
+    # ...and must not read the camelCase key REST never sends.
+    assert "health.auditChainValid" not in app_jsx
+    # The other two header fields must also match the payload.
+    for key in ("status", "skills"):
+        assert f"health.{key}" in app_jsx
+        assert key in body
+
+
 def test_graphql_library_browsing(client):
     data = gql(client, "{ skills { name lifecycle } }")
     names = sorted(s["name"] for s in data["skills"])

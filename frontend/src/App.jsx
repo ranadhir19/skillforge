@@ -240,7 +240,7 @@ export default function App() {
         <p>Model-agnostic skills: portable packages, enforced permissions,
            evals before trust, humans at the gate.
            {health && <> · API: {health.status} · {health.skills} skills ·
-             audit chain {health.auditChainValid ? "valid" : "BROKEN"}</>}</p>
+             audit chain {health.audit_chain_valid ? "valid" : "BROKEN"}</>}</p>
         <nav>
           {["library", "run", "create"].map((t) => (
             <button key={t} className={tab === t ? "on" : ""}
