@@ -16,8 +16,9 @@ services:
         value: /tmp/skillforge-data
       - key: PYTHON_VERSION
         value: 3.12.3
-  - type: static
+  - type: web
     name: skillforge-web
+    env: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
     envVars:
