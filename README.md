@@ -15,6 +15,10 @@ Everything below runs **offline, with no API keys**. Key-gated
 OpenAI/Anthropic adapters sit behind the same provider seam for
 deployments that have keys.
 
+## Watch it built
+
+This platform is part of the portfolio built and measured on camera at **[The Architect's AI Workshop](https://www.youtube.com/@ArchitectsAIWorkshop)** — *first principles on the whiteboard, built live in the editor, measured honestly.* Browse the episodes: [youtube.com/@ArchitectsAIWorkshop/videos](https://www.youtube.com/@ArchitectsAIWorkshop/videos)
+
 ## Quickstart
 
 ```bash
